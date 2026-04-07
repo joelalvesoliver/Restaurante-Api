@@ -19,14 +19,33 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+//Exercicio 3 - LogMiddleware1
+app.UseMiddleware<RequestLogMiddleware1>();
+
+//Exercicio 1 - Middleware de cabecalho obrigatorio
+app.UseMiddleware<CabecalhoObrigatorioMiddleware>();
+
+//Exercicio 2 - Curto-circuito por horario
+app.UseMiddleware<CurtoCircuitoHorarioMiddleware>();
+
+//Exercicio 3 - LogMiddleware2
+app.UseMiddleware<RequestLogMiddleware2>();
+
+//Exercicio 3 - LogMiddleware3
+app.UseMiddleware<RequestLogMiddleware3>();
 
 
-// meu segundo middleware
+/*
+* Middlewares feitos em sala.
+/
+ // meu segundo middleware
 app.UseMiddleware<BloqueioHeaderMiddleware>();
 // Configure the HTTP request pipeline.
 
 // meu primeiro middleware
 app.UseMiddleware<RequestTrackingMiddleware>();
+*/
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -38,9 +57,3 @@ app.MapControllerRoute(
 app.MapControllers();
 
 app.Run();
-
-
-
-
-// Enviar E-mail da conta do Github no Chat
-// Para adicionar vocês como colaboradores do projeto

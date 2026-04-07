@@ -7,6 +7,16 @@ namespace Restaurante.Api.Controllers
     public class PedidosController : Controller
     {
 
+        /*
+        * Aula 2 - Exercício 2
+        *Post /api/Pedidos/id/{Id}
+        */
+        [HttpPost("id/{Id:int}")]
+        public IActionResult PostLoginHorario(int Id )
+        {
+            return Content($"Método Post - Pedido: {Id} - Acesso no horário permitido!");
+        }
+
         //api/Pedidos
         [HttpGet("")]
         public IActionResult Index()
