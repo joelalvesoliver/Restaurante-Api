@@ -1,3 +1,5 @@
+using Restaurante.Api.Middlewares;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
@@ -9,7 +11,6 @@ builder.Services.AddSwaggerGen();
 
 var app = builder.Build();
 
-// Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
@@ -18,6 +19,14 @@ if (app.Environment.IsDevelopment())
 
 app.UseHttpsRedirection();
 
+
+
+// meu segundo middleware
+app.UseMiddleware<BloqueioHeaderMiddleware>();
+// Configure the HTTP request pipeline.
+
+// meu primeiro middleware
+app.UseMiddleware<RequestTrackingMiddleware>();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -33,4 +42,5 @@ app.Run();
 
 
 
-// Retornamos as 20:50
+// Enviar E-mail da conta do Github no Chat
+// Para adicionar vocês como colaboradores do projeto
