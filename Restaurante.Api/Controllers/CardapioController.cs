@@ -4,7 +4,7 @@ namespace Restaurante.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CardapioController : Controller
+    public class zCardapioController : Controller
     {
 
         //api/cardapio
