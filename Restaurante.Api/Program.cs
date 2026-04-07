@@ -27,6 +27,19 @@ app.UseMiddleware<BloqueioHeaderMiddleware>();
 
 // meu primeiro middleware
 app.UseMiddleware<RequestTrackingMiddleware>();
+app.UseMiddleware<BloqueioHorarioMiddleware>();
+
+
+//Cada middleware:
+
+//Executa um código antes do _next()
+//Entrega a execução para o próximo middleware
+//Só retoma a execução quando o próximo middleware termina
+
+app.UseMiddleware<MiddlewareA>();
+app.UseMiddleware<MiddlewareB>();
+app.UseMiddleware<MiddlewareC>();
+
 app.UseAuthorization();
 
 app.MapControllerRoute(
