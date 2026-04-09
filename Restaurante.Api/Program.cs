@@ -1,10 +1,24 @@
+using Restaurante.Api.Filtros;
 using Restaurante.Api.Middlewares;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
-builder.Services.AddControllers();
+builder.Services.AddScoped<VerificarAutorizacaoFazerPedido>();
+builder.Services.AddScoped<LogAuditoria>();
+builder.Services.AddScoped<EnvolveRespostaFilter>();
+builder.Services.AddScoped<ExceptionFilter>();
+builder.Services.AddScoped<VericarCacheFilter>();
+
+builder.Services.AddControllers(
+options =>
+{
+    options.Filters.Add<EnvolveRespostaFilter>();
+    options.Filters.Add<ExceptionFilter>();
+
+}
+);
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();

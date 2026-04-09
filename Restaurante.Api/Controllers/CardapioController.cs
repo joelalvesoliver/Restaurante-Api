@@ -1,22 +1,26 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Restaurante.Api.Filtros;
 
 namespace Restaurante.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class CardapioController : Controller
+    //[ServiceFilter(typeof(VerificarAutorizacaoFazerPedido))]
+    public class CardapioController : ControllerBase
     {
 
         //api/cardapio
         [HttpGet("")]
+        [ServiceFilter(typeof(LogAuditoria))]
         public IActionResult Index()
         {
-
             return Content("Lista de pratos do cardapio");
         }
 
         //api/cardapio/prato/{id}
+        
         [HttpGet("prato/{id}")]
+        [ServiceFilter(typeof(VerificarAutorizacaoFazerPedido))]
         public IActionResult ObterPratoPeloId(int id)
         {
             return Content($"Detalhes do prato de id {id}");
@@ -29,6 +33,7 @@ namespace Restaurante.Api.Controllers
         }
         // api/cardapio/categoria/saladas/pagina/1
         [HttpGet("categoria/{nomeCategoria}/pagina/{pagina:int}")]
+        [TypeFilter(typeof(VericarCacheFilter))]
         public IActionResult ListarPorCategoria(string nomeCategoria, int pagina)
         {
             return Content($"Categoria {nomeCategoria}, pagina {pagina}");
