@@ -1,0 +1,73 @@
+{
+  "Version": 1,
+  "WorkspaceRootPath": "C:\\Users\\ikki_\\source\\repos\\Restaurante-Api\\.github\\",
+  "Documents": [
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9EEEFC-C7C8-488F-8A74-F57E03A8190D}|Restaurante.Api\\Restaurante.Api.csproj|c:\\users\\ikki_\\source\\repos\\restaurante-api\\.github\\restaurante.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9EEEFC-C7C8-488F-8A74-F57E03A8190D}|Restaurante.Api\\Restaurante.Api.csproj|solutionrelative:restaurante.api\\controllers\\weatherforecastcontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9EEEFC-C7C8-488F-8A74-F57E03A8190D}|Restaurante.Api\\Restaurante.Api.csproj|c:\\users\\ikki_\\source\\repos\\restaurante-api\\.github\\restaurante.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9EEEFC-C7C8-488F-8A74-F57E03A8190D}|Restaurante.Api\\Restaurante.Api.csproj|solutionrelative:restaurante.api\\program.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{2B9EEEFC-C7C8-488F-8A74-F57E03A8190D}|Restaurante.Api\\Restaurante.Api.csproj|c:\\users\\ikki_\\source\\repos\\restaurante-api\\.github\\restaurante.api\\controllers\\cardapiocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{2B9EEEFC-C7C8-488F-8A74-F57E03A8190D}|Restaurante.Api\\Restaurante.Api.csproj|solutionrelative:restaurante.api\\controllers\\cardapiocontroller.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    }
+  ],
+  "DocumentGroupContainers": [
+    {
+      "Orientation": 0,
+      "VerticalTabListWidth": 256,
+      "DocumentGroups": [
+        {
+          "DockedWidth": 200,
+          "SelectedChildIndex": 0,
+          "Children": [
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "WeatherForecastController.cs",
+              "DocumentMoniker": "C:\\Users\\ikki_\\source\\repos\\Restaurante-Api\\.github\\Restaurante.Api\\Controllers\\WeatherForecastController.cs",
+              "RelativeDocumentMoniker": "Restaurante.Api\\Controllers\\WeatherForecastController.cs",
+              "ToolTip": "C:\\Users\\ikki_\\source\\repos\\Restaurante-Api\\.github\\Restaurante.Api\\Controllers\\WeatherForecastController.cs",
+              "RelativeToolTip": "Restaurante.Api\\Controllers\\WeatherForecastController.cs",
+              "ViewState": "AgIAAAUAAAAAAAAAAAAowCAAAAABAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T00:46:21.108Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Bookmark",
+              "Name": "ST:0:0:{1c4feeaa-4718-4aa9-859d-94ce25d182ba}"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 1,
+              "Title": "Program.cs",
+              "DocumentMoniker": "C:\\Users\\ikki_\\source\\repos\\Restaurante-Api\\.github\\Restaurante.Api\\Program.cs",
+              "RelativeDocumentMoniker": "Restaurante.Api\\Program.cs",
+              "ToolTip": "C:\\Users\\ikki_\\source\\repos\\Restaurante-Api\\.github\\Restaurante.Api\\Program.cs",
+              "RelativeToolTip": "Restaurante.Api\\Program.cs",
+              "ViewState": "AQIAAA0AAAAAAAAAAAAQwB0AAAAAAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T00:46:21.338Z"
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "CardapioController.cs",
+              "DocumentMoniker": "C:\\Users\\ikki_\\source\\repos\\Restaurante-Api\\.github\\Restaurante.Api\\Controllers\\CardapioController.cs",
+              "RelativeDocumentMoniker": "Restaurante.Api\\Controllers\\CardapioController.cs",
+              "ToolTip": "C:\\Users\\ikki_\\source\\repos\\Restaurante-Api\\.github\\Restaurante.Api\\Controllers\\CardapioController.cs",
+              "RelativeToolTip": "Restaurante.Api\\Controllers\\CardapioController.cs",
+              "ViewState": "AQIAAAAAAAAAAAAAAAAAAC4AAAACAAAA",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2026-04-07T00:46:21.341Z"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
