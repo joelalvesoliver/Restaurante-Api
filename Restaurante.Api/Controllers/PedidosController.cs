@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using Restaurante.Api.Filtros;
 
 namespace Restaurante.Api.Controllers
 {
@@ -56,5 +57,20 @@ namespace Restaurante.Api.Controllers
         {
             return Ok($"Ação de negócio recebida (param='acaoPedido'): {acaoPedido}");
         }
+ 
+        /* Aula 03 - Exercício 1
+        * GET /api/pedidos/id:int}
+        * Rota criada para que exista um pedido com id inteiro pra ser validado pelo filtro
+        */
+        [HttpGet("{Id:int}")]
+        [ServiceFilter(typeof(ValidaIdPositivoFilter))]
+        public IActionResult VerificarPedido(int Id)
+        {
+            /* Aula 03 - Exercício 3
+            * A chamada abaixo simula uma Argument Exception de forma a testar o filtro correspondente
+            */
+            //throw new ArgumentException();
+            return Ok($"Pedido Com identificador: {Id} OK!");
+        } 
     }
 }

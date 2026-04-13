@@ -10,13 +10,18 @@ builder.Services.AddScoped<LogAuditoria>();
 builder.Services.AddScoped<EnvolveRespostaFilter>();
 builder.Services.AddScoped<ExceptionFilter>();
 builder.Services.AddScoped<VericarCacheFilter>();
+builder.Services.AddScoped<ValidaIdPositivoFilter>();
+builder.Services.AddScoped<HeaderCustomizadoFilter>();
+builder.Services.AddScoped<ArgumentExceptionFilter>();
+
 
 builder.Services.AddControllers(
 options =>
 {
-    options.Filters.Add<EnvolveRespostaFilter>();
-    options.Filters.Add<ExceptionFilter>();
-
+    options.Filters.Add<ArgumentExceptionFilter>();
+    options.Filters.Add<HeaderCustomizadoFilter>();
+    //options.Filters.Add<EnvolveRespostaFilter>();
+    //options.Filters.Add<ExceptionFilter>();
 }
 );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
@@ -36,11 +41,11 @@ app.UseHttpsRedirection();
 
 
 // meu segundo middleware
-app.UseMiddleware<BloqueioHeaderMiddleware>();
+//app.UseMiddleware<BloqueioHeaderMiddleware>();
 // Configure the HTTP request pipeline.
 
 // meu primeiro middleware
-app.UseMiddleware<RequestTrackingMiddleware>();
+//app.UseMiddleware<RequestTrackingMiddleware>();
 app.UseAuthorization();
 
 app.MapControllerRoute(
@@ -57,4 +62,4 @@ app.Run();
 
 
 // Enviar E-mail da conta do Github no Chat
-// Para adicionar vocês como colaboradores do projeto
+// Para adicionar vocï¿½s como colaboradores do projeto
