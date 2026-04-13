@@ -11,7 +11,7 @@ namespace Restaurante.Api.Filtros
         }
         public void OnActionExecuted(ActionExecutedContext context)
         {
-            // logica que será executada após acionar a rota
+            // logica que será executada após acionar a rota/ação
             var trackingId = context.HttpContext.Request.Headers["traceId"];
             var controller = context.RouteData.Values["controller"];
             var action = context.RouteData.Values["action"];
@@ -23,7 +23,7 @@ namespace Restaurante.Api.Filtros
 
         public void OnActionExecuting(ActionExecutingContext context)
         {
-            // logica que será executada antes de chamada da rota
+            // logica que será executada antes de chamada da rota/ação
             var trackingId = context.HttpContext.Request.Headers["traceId"];
             var controller = context.RouteData.Values["controller"];
             var action = context.RouteData.Values["action"];

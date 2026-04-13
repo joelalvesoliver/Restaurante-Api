@@ -1,3 +1,4 @@
+using Restaurante.Api;
 using Restaurante.Api.Filtros;
 using Restaurante.Api.Middlewares;
 
@@ -10,13 +11,17 @@ builder.Services.AddScoped<LogAuditoria>();
 builder.Services.AddScoped<EnvolveRespostaFilter>();
 builder.Services.AddScoped<ExceptionFilter>();
 builder.Services.AddScoped<VericarCacheFilter>();
+builder.Services.AddScoped<ValidaIdPositivo>();
+builder.Services.AddScoped<AdicionaHoraResposta>();
+builder.Services.AddScoped<ArgumentExceptionFilter>();
 
 builder.Services.AddControllers(
 options =>
 {
     options.Filters.Add<EnvolveRespostaFilter>();
     options.Filters.Add<ExceptionFilter>();
-
+    options.Filters.Add<AdicionaHoraResposta>();
+    options.Filters.Add<ArgumentExceptionFilter>();
 }
 );
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
