@@ -14,7 +14,7 @@ builder.Services.AddScoped<VericarCacheFilter>();
 builder.Services.AddControllers(
 options =>
 {
-    options.Filters.Add<EnvolveRespostaFilter>();
+    //options.Filters.Add<EnvolveRespostaFilter>();
     options.Filters.Add<ExceptionFilter>();
 
 }
