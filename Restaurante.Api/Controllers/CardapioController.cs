@@ -49,4 +49,19 @@ namespace Restaurante.Api.Controllers
  area
  page
  handler
-*/
+
+ 
+200 OK: leitura ou operacao concluida com retorno;
+201 Created: recurso criado com sucesso;
+204 NoContent: sucesso sem corpo de resposta;
+
+400 BadRequest: erro de validacao/entrada;
+401 Unauthorized: nao autenticado;
+403 Forbidden: autenticado, mas sem permissao;
+404 NotFound: recurso nao encontrado;
+
+500 InternalServerError: erro inesperado no servidor.
+503 Serviço indiponível
+504 timeout, demorou para responder
+ 
+ */

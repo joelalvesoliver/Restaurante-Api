@@ -24,8 +24,6 @@ namespace Restaurante.Api.Middlewares
                     context.Response.StatusCode = StatusCodes.Status403Forbidden;
                     return;
                 }
-
-                
             }
 
             await _next(context);
