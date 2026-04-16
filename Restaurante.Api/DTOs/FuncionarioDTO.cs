@@ -1,4 +1,5 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using SimuladorBancoDados;
+using System.ComponentModel.DataAnnotations;
 
 namespace Restaurante.Api.DTOs
 {
@@ -18,6 +19,6 @@ namespace Restaurante.Api.DTOs
             ErrorMessage = "Senha deve ter no minimo 6 caracteres")]
         public string Senha { get; set; }
 
-        public int Funcao { get; set; }
+        public Funcao Funcao { get; set; }
     }
 }
