@@ -1,5 +1,10 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.IdentityModel.Tokens;
 using Restaurante.Api.Filtros;
 using Restaurante.Api.Middlewares;
+using SimuladorBancoDados.Interfaces;
+using SimuladorBancoDados.Service;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +15,36 @@ builder.Services.AddScoped<LogAuditoria>();
 builder.Services.AddScoped<EnvolveRespostaFilter>();
 builder.Services.AddScoped<ExceptionFilter>();
 builder.Services.AddScoped<VericarCacheFilter>();
+
+//builder.Services.AddSingleton -- o gerenciamento ele é feito no iniciar da aplicação
+//builder.Services.AddTransient -- Sempre que é preciso do objeto ele é criado e devolvido
+//builder.Services.AddScoped   -- O objeto permanece valido durante o escopo de onde ele foi criado
+
+builder.Services.AddSingleton<IBancoDados, BancoDadosService>();
+
+var jwtSection = builder.Configuration.GetSection("Jwt");
+var jwtKey = jwtSection["Key"]
+    ?? throw new InvalidOperationException("Configuracao Jwt:Key nao encontrada.");
+var jwtIssuer = jwtSection["Issuer"]
+    ?? throw new InvalidOperationException("Configuracao Jwt:Issuer nao encontrada.");
+var jwtAudience = jwtSection["Audience"]
+    ?? throw new InvalidOperationException("Configuracao Jwt:Audience nao encontrada.");
+
+builder.Services
+    .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
+    .AddJwtBearer(options =>
+    {
+        options.TokenValidationParameters = new TokenValidationParameters
+        {
+            ValidateIssuer = true,
+            ValidateAudience = true,
+            ValidateLifetime = true,
+            ValidateIssuerSigningKey = true,
+            ValidIssuer = jwtIssuer,
+            ValidAudience = jwtAudience,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(jwtKey))
+        };
+    });
 
 builder.Services.AddControllers(
 options =>
@@ -41,6 +76,9 @@ app.UseMiddleware<BloqueioHeaderMiddleware>();
 
 // meu primeiro middleware
 app.UseMiddleware<RequestTrackingMiddleware>();
+
+
+
 app.UseAuthorization();
 
 app.MapControllerRoute(

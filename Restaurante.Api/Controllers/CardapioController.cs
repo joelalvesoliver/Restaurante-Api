@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Restaurante.Api.Filtros;
+using SimuladorBancoDados.Interfaces;
+using SimuladorBancoDados.Service;
 
 namespace Restaurante.Api.Controllers
 {
@@ -8,7 +10,10 @@ namespace Restaurante.Api.Controllers
     //[ServiceFilter(typeof(VerificarAutorizacaoFazerPedido))]
     public class CardapioController : ControllerBase
     {
-
+        public CardapioController() 
+        {           
+        }
+        
         //api/cardapio
         [HttpGet("")]
         [ServiceFilter(typeof(LogAuditoria))]
