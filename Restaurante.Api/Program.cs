@@ -21,6 +21,7 @@ builder.Services.AddScoped<VericarCacheFilter>();
 //builder.Services.AddScoped   -- O objeto permanece valido durante o escopo de onde ele foi criado
 
 builder.Services.AddSingleton<IBancoDados, BancoDadosService>();
+builder.Services.AddSingleton<IPratoRepository, PratoRepository>();
 
 var jwtSection = builder.Configuration.GetSection("Jwt");
 var jwtKey = jwtSection["Key"]
