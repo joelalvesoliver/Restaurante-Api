@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Restaurante.Api.Filtros;
 using Restaurante.Api.Middlewares;
+using Restaurante.Api.Services;
 using SimuladorBancoDados.Interfaces;
 using SimuladorBancoDados.Service;
 using System.Text;
@@ -37,7 +38,7 @@ builder.Services.AddScoped<LogAuditoria>();
 builder.Services.AddScoped<EnvolveRespostaFilter>();
 builder.Services.AddScoped<ExceptionFilter>();
 builder.Services.AddScoped<VericarCacheFilter>();
-
+builder.Services.AddScoped<ArquivoService>();
 //builder.Services.AddSingleton -- o gerenciamento ele é feito no iniciar da aplicação
 //builder.Services.AddTransient -- Sempre que é preciso do objeto ele é criado e devolvido
 //builder.Services.AddScoped   -- O objeto permanece valido durante o escopo de onde ele foi criado

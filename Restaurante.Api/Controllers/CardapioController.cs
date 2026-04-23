@@ -31,18 +31,18 @@ namespace Restaurante.Api.Controllers
             return Content($"Detalhes do prato de id {id}");
         }
         //3f2504e0-4f89-11d3-9a0c-0305e82c3301
-        [HttpGet("prato-guid/{id:guid}")]
-        public IActionResult ObterPratoPorGuid(Guid id)
-        {
-            return Content($"Busca do prato com o guid {id}");
-        }
+        //[HttpGet("prato-guid/{id:guid}")]
+        //public IActionResult ObterPratoPorGuid(Guid id)
+        //{
+        //    return Content($"Busca do prato com o guid {id}");
+        //}
         // api/cardapio/categoria/saladas/pagina/1
-        [HttpGet("categoria/{nomeCategoria}/pagina/{pagina:int}")]
-        [TypeFilter(typeof(VericarCacheFilter))]
-        public IActionResult ListarPorCategoria(string nomeCategoria, int pagina)
-        {
-            return Content($"Categoria {nomeCategoria}, pagina {pagina}");
-        }
+        //[HttpGet("categoria/{nomeCategoria}/pagina/{pagina:int}")]
+        //[TypeFilter(typeof(VericarCacheFilter))]
+        //public IActionResult ListarPorCategoria(string nomeCategoria, int pagina)
+        //{
+        //    return Content($"Categoria {nomeCategoria}, pagina {pagina}");
+        //}
     }
 }
 
