@@ -19,6 +19,7 @@
         Gerente = 1,
         Garcom = 2,
         Atendente = 3,
-        Cozinha = 4
+        Cozinha = 4,
+        Admin = 5
     }
 }

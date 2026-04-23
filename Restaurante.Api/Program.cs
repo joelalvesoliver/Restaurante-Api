@@ -10,6 +10,28 @@ var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("AllowAllPolicy",
+//        policy =>
+//        {
+//            policy.AllowAnyOrigin()    // Permite qualquer domínio
+//                  .AllowAnyMethod()    // Permite GET, POST, PUT, DELETE, etc.
+//                  .AllowAnyHeader();   // Permite qualquer cabeçalho
+//        });
+//});
+
+//builder.Services.AddCors(options =>
+//{
+//    options.AddPolicy("FrontendPolicy", policy =>
+//    {
+//        // Liberar apenas o frontend local da turma
+//        policy.WithOrigins("https://lms.ada.tech/", "")
+//              .AllowAnyMethod()
+//              .AllowAnyHeader();
+//    });
+//});
+
 builder.Services.AddScoped<VerificarAutorizacaoFazerPedido>();
 builder.Services.AddScoped<LogAuditoria>();
 builder.Services.AddScoped<EnvolveRespostaFilter>();
@@ -54,10 +76,37 @@ options =>
     options.Filters.Add<ExceptionFilter>();
 
 }
-);
+).AddXmlSerializerFormatters();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
+
+builder.Services.AddSwaggerGen(options =>
+{
+    options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+    {
+        Description = "Use: Bearer {seu_token_jwt}",
+        Name = "Authorization",
+        In = Microsoft.OpenApi.Models.ParameterLocation.Header,
+        Type = Microsoft.OpenApi.Models.SecuritySchemeType.Http,
+        Scheme = "bearer",
+        BearerFormat = "JWT"
+    });
+
+    options.AddSecurityRequirement(new Microsoft.OpenApi.Models.OpenApiSecurityRequirement
+    {
+        {
+            new Microsoft.OpenApi.Models.OpenApiSecurityScheme
+            {
+                Reference = new Microsoft.OpenApi.Models.OpenApiReference
+                {
+                    Type = Microsoft.OpenApi.Models.ReferenceType.SecurityScheme,
+                    Id = "Bearer"
+                }
+            },
+            Array.Empty<string>()
+        }
+    });
+});
 
 var app = builder.Build();
 
@@ -70,7 +119,6 @@ if (app.Environment.IsDevelopment())
 app.UseHttpsRedirection();
 
 
-
 // meu segundo middleware
 app.UseMiddleware<BloqueioHeaderMiddleware>();
 // Configure the HTTP request pipeline.
@@ -78,7 +126,10 @@ app.UseMiddleware<BloqueioHeaderMiddleware>();
 // meu primeiro middleware
 app.UseMiddleware<RequestTrackingMiddleware>();
 
+app.UseRouting();
 
+//app.UseCors("AllowAllPolicy");
+//app.UseCors("FrontendPolicy");
 
 app.UseAuthorization();
 
@@ -97,3 +148,4 @@ app.Run();
 
 // Enviar E-mail da conta do Github no Chat
 // Para adicionar vocês como colaboradores do projeto
+// CORS Cros-Origin Resource Sharing
