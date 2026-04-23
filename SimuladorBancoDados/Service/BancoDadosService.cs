@@ -10,6 +10,16 @@ namespace SimuladorBancoDados.Service
         public BancoDadosService()
         {
             usuarios = new List<Usuario>();
+            var usuario = new UsuarioDto();
+            usuario.Nome = "Admin";
+            usuario.Email = "admin@admin.com";
+            usuario.Ativo = true;
+            usuario.DataCadastro = DateTime.Now;
+            usuario.Funcao = Funcao.Admin;
+            usuario.Senha = "12345";
+
+            usuarios.Add(new Usuario(usuario, proximoId));
+            proximoId++;
         }
         public void AdicionarNovoUsuario(UsuarioDto usuarioDto)
         {
@@ -64,6 +74,31 @@ namespace SimuladorBancoDados.Service
             foreach (var usuario in usuarios)
             {
                 if (usuario.Email == email)
+                {
+                    usuarioRetorno = new UsuarioDto
+                    {
+                        Id = usuario.Id,
+                        Nome = usuario.Nome,
+                        Email = usuario.Email,
+                        Ativo = usuario.Ativo,
+                        DataCadastro = usuario.DataCadastro,
+                        Funcao = usuario.Funcao,
+                        Senha = usuario.Senha
+                    };
+
+                    break;
+                }
+            }
+
+            return usuarioRetorno;
+        }
+
+        public UsuarioDto? BuscarUsuarioPorNomeEEmail(string nome, string email)
+        {
+            UsuarioDto usuarioRetorno = null;
+            foreach (var usuario in usuarios)
+            {
+                if (usuario.Email == email && usuario.Nome == nome)
                 {
                     usuarioRetorno = new UsuarioDto
                     {
