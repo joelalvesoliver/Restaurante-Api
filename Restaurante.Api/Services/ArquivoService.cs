@@ -323,5 +323,39 @@ namespace Restaurante.Api.Services
                 return false;
             }
         }
+
+
+        // Valida se o arquivo existe
+        public bool ArquivoExiste(string nomeArquivo)
+        {
+            try
+            {
+                // Extrai apenas o nome do arquivo do caminho (segurança contra manipulação de caminhos)
+                var nomeSeguro = Path.GetFileName(nomeArquivo);
+
+                // Monta o caminho completo do arquivo
+                var caminhoCompleto = Path.Combine(_pastaBase, nomeSeguro);
+
+                // Verifica se o arquivo existe antes de tentar deletar
+                if (!File.Exists(caminhoCompleto))
+                {
+                    // Se não existir, registra um aviso e retorna falso
+                    _logger.LogWarning("Arquivo nao encontrado: {Nome}", nomeSeguro);
+                    return false;
+                }
+
+                // Registra no log que a deleção foi bem-sucedida
+                _logger.LogInformation("Arquivo existe: {Nome}", nomeSeguro);
+
+                // Retorna verdadeiro indicando que a operação funcionou
+                return true;
+            }
+            catch (Exception ex)
+            {
+                // Se algo der errado (arquivo em uso, permissões insuficientes, etc), registra o erro
+                _logger.LogError(ex, "Erro ao remover arquivo: {Nome}", nomeArquivo);
+                return false;
+            }
+        }
     }
 }
