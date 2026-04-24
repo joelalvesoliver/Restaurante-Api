@@ -43,7 +43,6 @@ namespace Restaurante.Api.Controllers
         [HttpGet("download/{nomeArquivo}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-
         public ActionResult Download(string nomeArquivo)
         {
             var stream = _arquivoService.ObterArquivoParaDownload(nomeArquivo);
@@ -103,3 +102,5 @@ namespace Restaurante.Api.Controllers
         }
     }
 }
+
+
