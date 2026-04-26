@@ -1,0 +1,39 @@
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Threading.Tasks;
+
+namespace Restaurante.Api.Middlewares
+{
+    public class HorarioPedidosMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public HorarioPedidosMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            if (HttpMethods.IsPost(context.Request.Method) &&
+                context.Request.Path.Equals("/api/pedidos", StringComparison.OrdinalIgnoreCase))
+            {
+                var agora = DateTime.Now.TimeOfDay;
+                var inicio = new TimeSpan(18, 0, 0);   // 18:00
+                var fim = new TimeSpan(23, 45, 0);     // 23:45
+
+                if (agora < inicio || agora > fim)
+                {
+                    context.Response.StatusCode = StatusCodes.Status423Locked;
+                    await context.Response.WriteAsync(
+                        "Encerramos o nosso atendimento por hoje e amanhã estaremos aqui a partir das 18:00 e você já está convidado!"
+                    );
+                    return; // curto-circuito
+                }
+            }
+
+            // Dentro da janela, segue o fluxo
+            await _next(context);
+        }
+    }
+}

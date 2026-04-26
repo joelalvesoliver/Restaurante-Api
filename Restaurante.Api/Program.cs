@@ -43,4 +43,4 @@ app.Run();
 
 
 // Enviar E-mail da conta do Github no Chat
-// Para adicionar vocês como colaboradores do projeto
+// Para adicionar vocï¿½s como colaboradores do projeto

@@ -1,0 +1,34 @@
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Threading.Tasks;
+
+namespace Restaurante.Api.Middlewares
+{
+    public class AtendenteNomeMiddleware
+    {
+        private readonly RequestDelegate _next;
+        public AtendenteNomeMiddleware(RequestDelegate next) => _next = next;
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            Console.WriteLine(">> Entrando A (Nome Atendente)");
+
+            if (context.Request.Path.StartsWithSegments("/api"))
+            {
+                if (!context.Request.Headers.TryGetValue("X-Atendente-Nome", out var nome) ||
+                    string.IsNullOrWhiteSpace(nome))
+                {
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    await context.Response.WriteAsync("Informe o header obrigatório: X-Atendente-Nome.");
+                    return; // bloqueia somente se faltar/for inválido
+                }
+
+                context.Items["AtendenteNome"] = nome.ToString().Trim();
+            }
+
+            await _next(context); // <- ESSENCIAL para o retorno inverso
+
+            Console.WriteLine("<< Saindo A (Nome Atendente)");
+        }
+    }
+}

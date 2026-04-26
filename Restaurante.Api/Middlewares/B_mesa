@@ -1,0 +1,42 @@
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Threading.Tasks;
+
+namespace Restaurante.Api.Middlewares
+{
+    public class MesaNumeroMiddleware
+    {
+        private readonly RequestDelegate _next;
+        public MesaNumeroMiddleware(RequestDelegate next) => _next = next;
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            Console.WriteLine(">> Entrando B (Número Mesa)");
+
+            if (context.Request.Path.StartsWithSegments("/api"))
+            {
+                if (!context.Request.Headers.TryGetValue("X-Mesa-Numero", out var mesaValor) ||
+                    string.IsNullOrWhiteSpace(mesaValor))
+                {
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    await context.Response.WriteAsync("Informe o header obrigatório: X-Mesa-Numero (01 a 19).");
+                    return;
+                }
+
+                var texto = mesaValor.ToString().Trim();
+                if (!int.TryParse(texto, out int mesa) || mesa < 1 || mesa > 19)
+                {
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    await context.Response.WriteAsync("Número da mesa inválido. Informe um valor entre 01 e 19.");
+                    return;
+                }
+
+                context.Items["MesaNumero"] = mesa.ToString("D2");
+            }
+
+            await _next(context); // <- ESSENCIAL para o retorno inverso
+
+            Console.WriteLine("<< Saindo B (Número Mesa)");
+        }
+    }
+}

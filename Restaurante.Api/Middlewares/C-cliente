@@ -1,0 +1,35 @@
+using Microsoft.AspNetCore.Http;
+using System;
+using System.Threading.Tasks;
+
+namespace Restaurante.Api.Middlewares
+{
+    public class ClienteNomeMiddleware
+    {
+        private readonly RequestDelegate _next;
+        public ClienteNomeMiddleware(RequestDelegate next) => _next = next;
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            Console.WriteLine(">> Entrando C (Nome Cliente)");
+
+            if (context.Request.Path.StartsWithSegments("/api"))
+            {
+                if (!context.Request.Headers.TryGetValue("X-Cliente-Nome", out var cliente) ||
+                    string.IsNullOrWhiteSpace(cliente))
+                {
+                    context.Response.StatusCode = StatusCodes.Status400BadRequest;
+                    await context.Response.WriteAsync("Informe o header obrigatório: X-Cliente-Nome.");
+                    return;
+                }
+
+                context.Items["ClienteNome"] = cliente.ToString().Trim();
+            }
+
+            await _next(context); // <- ESSENCIAL para o retorno inverso
+
+            Console.WriteLine("<< Saindo C (Nome Cliente)");
+        }
+    }
+}
+// A ordem de retorno dos middlewares é inversa à ordem de entrada porque o pipeline do ASP.NET Core funciona de forma encadeada, semelhante a uma pilha (stack). Cada middleware executa um código antes de chamar await _next(context), passando a requisição para o próximo. O processamento só retorna ao middleware anterior depois que todos os middlewares seguintes e o endpoint finalizam sua execução. Dessa forma, o último middleware a receber a requisição é o primeiro a executar o código de saída, resultando na ordem de retorno C → B → A, inversa à ordem de entrada A → B → C.

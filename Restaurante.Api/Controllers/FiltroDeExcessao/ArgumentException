@@ -1,0 +1,29 @@
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
+
+namespace Restaurante.Api.Filters
+{
+    public class ArgumentExceptionFilter : IExceptionFilter
+    {
+        public void OnException(ExceptionContext context)
+        {
+            // Verifica se a exceção é do tipo ArgumentException
+            if (context.Exception is ArgumentException argumentException)
+            {
+                // Define o resultado como um JSON com status 422
+                context.Result = new ObjectResult(new
+                {
+                    sucesso = false,
+                    erro = argumentException.Message,
+                    tipo = "ArgumentException"
+                })
+                {
+                    StatusCode = 422 // Unprocessable Entity
+                };
+
+                // Marca a exceção como tratada
+                context.ExceptionHandled = true;
+            }
+        }
+    }
+}

@@ -20,6 +20,11 @@ namespace Restaurante.Api.Controllers
         [HttpGet("mesa/{numeroMesa:int}")]
         public IActionResult BuscarMesaPeloNumero(int numeroMesa)
         {
+            if (numeroMesa <= 0)
+            {
+                return BadRequest("O número da mesa deve ser um valor positivo.");
+            }
+
             return Content($"Mesa número {numeroMesa}");
         }
 
@@ -34,18 +39,8 @@ namespace Restaurante.Api.Controllers
 
         /*  Exercício 3
         *   api/pedidos/IdPedido/{Id:int}/action/{acao}
-        *   Obs.: (.net 10)
-        *   Através da url: http://localhost:5207/api/Pedidos/IdPedido/1234/action/Cobranca
-        *   o código executou normalmente gerando a saída: 
-        *   "Ação de Cobranca executada para o pedido nº 1234"
-        *   =========================================================
-        *   Alterado para:
-        *   api/pedidos/IdPedido/{Id:int}/operacao/{acao}
-        *   Execução normal: http://localhost:5207/api/Pedidos/IdPedido/123456/operacao/Cancelamento
-        *   saída: "Ação de Cancelamento executada para o pedido nº 123456"
         */
         [HttpGet("IdPedido/{Id:int}/action/{acao}")]
-        //[HttpGet("IdPedido/{Id:int}/operacao/{acao}")]
         public IActionResult ExecutarAcao(int Id, string acao)
         {
             return Content($"Ação de {acao} executada para o pedido nº {Id}");
@@ -53,3 +48,5 @@ namespace Restaurante.Api.Controllers
 
     }
 }
+// Exercício 3: Palavras Reservadas
+// No ecossistema ASP.NET MVC, o termo action é considerado uma palavra reservada por convenção, pois é amplamente utilizado para representar o método do controller, conhecido como action method. O uso de action como nome de parâmetro em rotas pode reduzir a clareza do código, dificultando a leitura e a compreensão do seu real significado de negócio. Além disso, dependendo da configuração de rotas da aplicação, especialmente quando há rotas convencionais, essa escolha pode gerar ambiguidades ou conflitos com o mecanismo de roteamento do framework. Diante disso, recomenda-se a refatoração do parâmetro para nomes como operacao ou acao, que possuem significado mais alinhado ao domínio da aplicação, tornam a intenção do código mais explícita e evitam possíveis confusões técnicas e semânticas.

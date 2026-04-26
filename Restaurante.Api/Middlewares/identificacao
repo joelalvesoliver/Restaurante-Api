@@ -1,0 +1,36 @@
+using Microsoft.AspNetCore.Http;
+using System.Threading.Tasks;
+
+namespace Restaurante.Api.Middlewares
+{
+    public class RequiredHeaderMiddleware
+    {
+        private readonly RequestDelegate _next;
+
+        public RequiredHeaderMiddleware(RequestDelegate next)
+        {
+            _next = next;
+        }
+
+        public async Task InvokeAsync(HttpContext context)
+        {
+            // aplicar APENAS para rotas que começam com /api
+            if (context.Request.Path.StartsWithSegments("/api"))
+            {
+                // Pelo enunciado: exigir o header X-Turma [1](https://caixa-my.sharepoint.com/personal/c131972_corp_caixa_gov_br/Documents/UNIVERSIDADE/CAIXAVERSO/CAIXAVERSO/ADA/Asp.Net/Programa%c3%a7%c3%a3o%20Web%20II%20(ASP.NET%20MVC%20_%20WEB%20AP%20-%202%20-%2006%20de%20abr/AULA_02_Exercicio.pdf?web=1) Registrar o middleware no pipeline (Program.cs)
+
+No `Program.cs`, adicione **antes** do `MapControllers()`:
+
+```csharp
+using Restaurante.Api.Middlewares;
+
+var builder = WebApplication.CreateBuilder(args);
+
+builder.Services.AddControllers();
+
+var app = builder.Build();
+
+app.UseMiddleware<RequiredHeaderMiddleware>();
+
+app.MapControllers();
+app.Run();
