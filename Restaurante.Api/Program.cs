@@ -121,7 +121,7 @@ app.UseHttpsRedirection();
 
 
 // meu segundo middleware
-app.UseMiddleware<BloqueioHeaderMiddleware>();
+//app.UseMiddleware<BloqueioHeaderMiddleware>();
 // Configure the HTTP request pipeline.
 
 // meu primeiro middleware

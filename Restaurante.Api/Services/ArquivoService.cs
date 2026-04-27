@@ -289,6 +289,7 @@ namespace Restaurante.Api.Services
         /// </summary>
         /// <param name="nomeArquivo">Nome do arquivo a ser removido</param>
         /// <returns>True se o arquivo foi deletado com sucesso, False se não encontrou o arquivo ou houve erro</returns>
+        
         public bool RemoverArquivo(string nomeArquivo)
         {
             try
@@ -322,6 +323,33 @@ namespace Restaurante.Api.Services
                 _logger.LogError(ex, "Erro ao remover arquivo: {Nome}", nomeArquivo);
                 return false;
             }
+        }
+
+        //Retorna caminho do arquivo
+        public String CaminhoArquivo(String nomeArquivo)
+        {
+            var caminhoCompleto = Path.Combine(_pastaBase, nomeArquivo);
+
+            // Verifica se o arquivo existe no servidor
+            if (!File.Exists(caminhoCompleto))
+            {
+                // Se não existir retorna nulo
+                return null;
+            }
+            return caminhoCompleto;
+        }
+
+        public bool ArquivoExiste(String nomeArquivo)
+        {
+            var caminhoCompleto = Path.Combine(_pastaBase, nomeArquivo);
+
+            // Verifica se o arquivo existe no servidor
+            if (!File.Exists(caminhoCompleto))
+            {
+                // Se não existir retorna nulo
+                return false;
+            }
+            return true;
         }
     }
 }
