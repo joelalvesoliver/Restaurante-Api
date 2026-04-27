@@ -90,5 +90,17 @@ namespace SimuladorBancoDados.Service
                 }
             }
         }
+
+        public void Salvar(Prato prato)
+        {
+            // Se não tiver Id, gera um novo
+            if (prato.Id == 0)
+            {
+                prato.Id = pratos.Count > 0 ? pratos.Max(p => p.Id) + 1 : 1;
+            }
+
+            pratos.Add(prato);
+        }
+
     }
 }

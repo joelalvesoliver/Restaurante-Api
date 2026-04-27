@@ -357,5 +357,10 @@ namespace Restaurante.Api.Services
                 return false;
             }
         }
+
+        public string ObterUrlDownload(string idFoto)
+        {
+            return $"/api/arquivos/download/{idFoto}";
+        }
     }
 }

@@ -11,5 +11,8 @@ namespace SimuladorBancoDados.Interfaces
         void AdicionaPrato(Prato prato);
         void AtualizaPrato(Prato prato);
         void DeletaPrato(int id);
+
+        // novo método para salvar prato com id atrelada ao novo nome de arquivo guid
+        void Salvar(Prato prato);
     }
 }

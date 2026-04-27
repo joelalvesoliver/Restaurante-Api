@@ -39,6 +39,13 @@ builder.Services.AddScoped<EnvolveRespostaFilter>();
 builder.Services.AddScoped<ExceptionFilter>();
 builder.Services.AddScoped<VericarCacheFilter>();
 builder.Services.AddScoped<ArquivoService>();
+builder.Services.AddScoped<ArquivoService>(sp =>
+{
+    var logger = sp.GetRequiredService<ILogger<ArquivoService>>();
+    var env = sp.GetRequiredService<IWebHostEnvironment>();
+    return new ArquivoService(logger, env);
+});
+
 //builder.Services.AddSingleton -- o gerenciamento ele é feito no iniciar da aplicação
 //builder.Services.AddTransient -- Sempre que é preciso do objeto ele é criado e devolvido
 //builder.Services.AddScoped   -- O objeto permanece valido durante o escopo de onde ele foi criado
@@ -70,14 +77,14 @@ builder.Services
         };
     });
 
-builder.Services.AddControllers(
-options =>
+builder.Services.AddControllers(options =>
 {
     //options.Filters.Add<EnvolveRespostaFilter>();
     options.Filters.Add<ExceptionFilter>();
 
 }
 ).AddXmlSerializerFormatters();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 
@@ -117,21 +124,21 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+// Configure the HTTP request pipeline
 app.UseHttpsRedirection();
-
-
-// meu segundo middleware
-app.UseMiddleware<BloqueioHeaderMiddleware>();
-// Configure the HTTP request pipeline.
 
 // meu primeiro middleware
 app.UseMiddleware<RequestTrackingMiddleware>();
+
+// meu segundo middleware
+app.UseMiddleware<BloqueioHeaderMiddleware>();
 
 app.UseRouting();
 
 //app.UseCors("AllowAllPolicy");
 //app.UseCors("FrontendPolicy");
 
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(
