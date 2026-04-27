@@ -49,9 +49,10 @@ namespace Restaurante.Api.Controllers
                 dados.DataCadastro  = prato.DataCadastro;
                 dados.IdFoto = prato.IdFoto;
                 dados.Endpoint = _arquivoService.CaminhoArquivo(prato.IdFoto);
+                retorno.Add(dados);
             }
             _logger.LogInformation("Sucesso, lista emitida com sucesso.");
-            return Ok(pratos);
+            return Ok(retorno);
         }
 
         //api/cardapio

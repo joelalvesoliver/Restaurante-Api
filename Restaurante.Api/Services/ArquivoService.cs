@@ -336,7 +336,8 @@ namespace Restaurante.Api.Services
                 // Se não existir retorna nulo
                 return null;
             }
-            return caminhoCompleto;
+
+            return $"/api/arquivos/download/{nomeArquivo}";
         }
 
         public bool ArquivoExiste(String nomeArquivo)
