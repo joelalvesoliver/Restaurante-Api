@@ -7,23 +7,22 @@ namespace Restaurante.Api.Filters
     {
         public void OnException(ExceptionContext context)
         {
-            // Verifica se a exceção é do tipo ArgumentException
-            if (context.Exception is ArgumentException argumentException)
+            if (context.Exception is ArgumentException ex)
             {
-                // Define o resultado como um JSON com status 422
-                context.Result = new ObjectResult(new
+                var resposta = new
                 {
                     sucesso = false,
-                    erro = argumentException.Message,
+                    erro = ex.Message,
                     tipo = "ArgumentException"
-                })
-                {
-                    StatusCode = 422 // Unprocessable Entity
                 };
 
-                // Marca a exceção como tratada
+                context.Result = new ObjectResult(resposta)
+                {
+                    StatusCode = StatusCodes.Status422UnprocessableEntity
+                };
+
                 context.ExceptionHandled = true;
             }
         }
     }
-}
+}   
