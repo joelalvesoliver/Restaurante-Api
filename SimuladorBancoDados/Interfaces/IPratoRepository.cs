@@ -8,7 +8,7 @@ namespace SimuladorBancoDados.Interfaces
         List<Prato> BuscaTodosPratos();
         List<Prato> BuscaPorCategoria(string categoria);
         List<Prato> BuscaPratosAtivos();
-        void AdicionaPrato(Prato prato);
+        Prato? AdicionaPrato(Prato prato);
         void AtualizaPrato(Prato prato);
         void DeletaPrato(int id);
     }

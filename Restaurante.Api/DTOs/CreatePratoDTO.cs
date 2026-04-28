@@ -1,11 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
-namespace SimuladorBancoDados.Entidade
+namespace Restaurante.Api.DTOs
 {
-public class Prato
+    public class CreatePratoDTO
     {
-         public int Id { get; set; }
         [Required(ErrorMessage = "Nome é obrigatório")]
         [StringLength(150, ErrorMessage = "Nome não pode exceder 150 caracteres")]
         public string Nome { get; set; }
@@ -21,7 +20,5 @@ public class Prato
         public string IdFoto { get; set; }
         [Required(ErrorMessage = "A URL para download da foto é obrigatório")]
         public string UrlDownload { get; set; }
-        public bool Ativo { get; set; } = true;
-        public DateTime DataCadastro { get; set; } = DateTime.Now;
-    }
+   }
 }

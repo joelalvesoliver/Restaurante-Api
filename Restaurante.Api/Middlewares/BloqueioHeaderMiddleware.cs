@@ -16,7 +16,7 @@ namespace Restaurante.Api.Middlewares
             if (context.Request.Path.StartsWithSegments("/api/Cardapio"))
             {
                 var canal = context.Request.Headers["X-Canal"].ToString();
-                if(!string.Equals(canal, "app", StringComparison.OrdinalIgnoreCase))
+                if(string.Equals(canal, "app", StringComparison.OrdinalIgnoreCase))
                 {
                     var traceId = context.Request.Headers["traceId"].ToString();
                     Console.WriteLine($"[Trackin] Requisicao invalida, canal {canal} não suportado, traceId {traceId}");

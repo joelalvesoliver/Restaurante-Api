@@ -1,0 +1,83 @@
+------------------------------------------------------------------------------
+You may only use the Microsoft Visual Studio .NET/C/C++ Debugger (vsdbg) with
+Visual Studio Code, Visual Studio or Visual Studio for Mac software to help you
+develop and test your applications.
+------------------------------------------------------------------------------
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5207
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: C:\workspace\web\Restaurante-Api\Restaurante.Api
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+[Trackin IN ] GET /foto/4d40e340-fe93-46e4-a8f9-f1e22fe11196.jpg d39088ff-bdba-40ec-bb3a-263e6816fc40
+info: SimuladorBancoDados.Service.PratoRepository[0]
+      Prato 1 criado
+info: Restaurante.Api.Controllers.CardapioController[0]
+      Requisicao para download de arquivo: 4d40e340-fe93-46e4-a8f9-f1e22fe11196.jpg
+info: Restaurante.Api.Services.ArquivoService[0]
+      Download iniciado para arquivo: 4d40e340-fe93-46e4-a8f9-f1e22fe11196.jpg
+[Trackin OUT]  200d39088ff-bdba-40ec-bb3a-263e6816fc40
+[Trackin IN ] GET /api/Arquivos/download/4d40e340-fe93-46e4-a8f9-f1e22fe11196.jpg 345c6c8d-ebb4-44d9-b316-724396b424fa
+info: Restaurante.Api.Services.ArquivoService[0]
+      Download iniciado para arquivo: 4d40e340-fe93-46e4-a8f9-f1e22fe11196.jpg
+[Trackin OUT]  200345c6c8d-ebb4-44d9-b316-724396b424fa
+[Trackin IN ] POST /cadastrar-prato 6820a8f8-902d-4f28-a0d1-40192d29bd50
+info: Restaurante.Api.Controllers.CardapioController[0]
+      Requisicao para cadastro de um novo prato
+info: Restaurante.Api.Services.ArquivoService[0]
+      Arquivo existe: acc760ad-89ce-460b-b84c-eff6ec48d270.jpg
+info: SimuladorBancoDados.Service.PratoRepository[0]
+      Prato 2 criado
+info: Restaurante.Api.Controllers.CardapioController[0]
+      Prato 2 Criado com sucesso!
+warn: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter[2]
+      An error occurred while trying to create an XmlSerializer for the type '<>f__AnonymousType2`7[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+      System.InvalidOperationException: <>f__AnonymousType2`7[System.Int32,System.String,System.Decimal,System.String,System.String,System.String,System.String] cannot be serialized because it does not have a parameterless constructor.
+         at System.Xml.Serialization.TypeDesc.CheckSupported()
+         at System.Xml.Serialization.TypeScope.GetTypeDesc(Type type, MemberInfo source, Boolean directReference, Boolean throwOnError)
+         at System.Xml.Serialization.ModelScope.GetTypeModel(Type type, Boolean directReference)
+         at System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(Type type, XmlRootAttribute root, String defaultNamespace)
+         at System.Xml.Serialization.XmlSerializer..ctor(Type type, String defaultNamespace)
+         at Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.CreateSerializer(Type type)
+[Trackin OUT]  2016820a8f8-902d-4f28-a0d1-40192d29bd50
+[Trackin IN ] GET /api/Cardapio/prato/2 5c8517b2-fcc1-47e8-ac89-abc5b295a15f
+[Trackin OUT]  2005c8517b2-fcc1-47e8-ac89-abc5b295a15f
+[Trackin IN ] GET /api/Cardapio 9b0b8255-674a-42b6-9dc5-a8768d7cf5b1
+info: Restaurante.Api.Controllers.CardapioController[0]
+      [Lista Pratos] Lista de todos os pratos (OK)
+[Trackin OUT]  2009b0b8255-674a-42b6-9dc5-a8768d7cf5b1
+[Trackin IN ] POST /upload-foto b8effab8-c6a9-4ae3-a1be-6a14a66b4bc8
+info: Restaurante.Api.Controllers.CardapioController[0]
+      Requisicao de upload de arquivo: 3.jpg
+info: Restaurante.Api.Services.ArquivoService[0]
+      Upload realizado com sucesso. Original: 3.jpg, Armazenado: 8a6c0d78-039d-4998-814d-b5ec26cc8667.jpg, Tamanho: 128321 bytes
+info: Restaurante.Api.Controllers.CardapioController[0]
+      Upload do arquivo 3.jpg realizado com sucesso!
+[Trackin OUT]  200b8effab8-c6a9-4ae3-a1be-6a14a66b4bc8
+[Trackin IN ] POST /cadastrar-prato c8b959d7-bc61-4c5b-98aa-596c1138f64e
+info: Restaurante.Api.Controllers.CardapioController[0]
+      Requisicao para cadastro de um novo prato
+info: Restaurante.Api.Services.ArquivoService[0]
+      Arquivo existe: 8a6c0d78-039d-4998-814d-b5ec26cc8667.jpg
+info: SimuladorBancoDados.Service.PratoRepository[0]
+      Prato 3 criado
+info: Restaurante.Api.Controllers.CardapioController[0]
+      Prato 3 Criado com sucesso!
+warn: Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter[2]
+      An error occurred while trying to create an XmlSerializer for the type '<>f__AnonymousType2`7[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.Decimal, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+      System.InvalidOperationException: <>f__AnonymousType2`7[System.Int32,System.String,System.Decimal,System.String,System.String,System.String,System.String] cannot be serialized because it does not have a parameterless constructor.
+         at System.Xml.Serialization.TypeDesc.CheckSupported()
+         at System.Xml.Serialization.TypeScope.GetTypeDesc(Type type, MemberInfo source, Boolean directReference, Boolean throwOnError)
+         at System.Xml.Serialization.ModelScope.GetTypeModel(Type type, Boolean directReference)
+         at System.Xml.Serialization.XmlReflectionImporter.ImportTypeMapping(Type type, XmlRootAttribute root, String defaultNamespace)
+         at System.Xml.Serialization.XmlSerializer..ctor(Type type, String defaultNamespace)
+         at Microsoft.AspNetCore.Mvc.Formatters.XmlSerializerOutputFormatter.CreateSerializer(Type type)
+[Trackin OUT]  201c8b959d7-bc61-4c5b-98aa-596c1138f64e
+[Trackin IN ] GET /api/Cardapio 840a6456-a397-42ce-b911-2ecc073a3346
+info: Restaurante.Api.Controllers.CardapioController[0]
+      [Lista Pratos] Lista de todos os pratos (OK)
+[Trackin OUT]  200840a6456-a397-42ce-b911-2ecc073a3346

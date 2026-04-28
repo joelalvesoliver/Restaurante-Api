@@ -8,18 +8,34 @@ namespace SimuladorBancoDados.Service
     {
         private readonly ILogger<PratoRepository> _logger;
         private List<Prato> pratos;
-        private int proximoId = 1;
+        public int proximoId { get; private set; } = 1;
         public PratoRepository(ILogger<PratoRepository> logger)
         {
             _logger = logger;
             pratos = new List<Prato>();
+
+            var prato = new Prato
+            {
+                Id = proximoId,
+                Nome = "Prato1",
+                Preco = 10m,
+                Descricao = "Prato muito gostoso",
+                Categoria = "Prato Fino",
+                IdFoto = "4d40e340-fe93-46e4-a8f9-f1e22fe11196.jpg",
+                UrlDownload = "/api/arquivos/download/4d40e340-fe93-46e4-a8f9-f1e22fe11196.jpg",
+                Ativo = true,
+                DataCadastro = DateTime.Now
+            };
+            this.AdicionaPrato(prato);
+
         }
-        public void AdicionaPrato(Prato prato)
+        public Prato AdicionaPrato(Prato prato)
         {
             prato.Id = proximoId;
             pratos.Add(prato);
             _logger.LogInformation("Prato {0} criado", prato.Id);
             proximoId++;
+            return prato;
         }
 
         public void AtualizaPrato(Prato prato)

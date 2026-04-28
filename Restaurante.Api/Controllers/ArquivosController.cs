@@ -51,7 +51,9 @@ namespace Restaurante.Api.Controllers
                 return NotFound(new { Mensagem = "Arquivo não encontrado" });
             }
 
-            var contetType = GetMimeType(nomeArquivo);
+            //var contetType = GetMimeType(nomeArquivo);
+            var contetType = UtilitariosService.GetMimeType(nomeArquivo);
+
             return File(stream, contetType, nomeArquivo);
         }
 
@@ -87,6 +89,7 @@ namespace Restaurante.Api.Controllers
             return Ok(new { Mensagem = "Arquivo removido com sucesso" });
         }
 
+/*
         private static string GetMimeType(string nomeArquivo)
         {
             var extensao = Path.GetExtension(nomeArquivo).ToLowerInvariant();
@@ -100,6 +103,7 @@ namespace Restaurante.Api.Controllers
                 _ => "application/octet-stream"
             };
         }
+*/
     }
 }
 
