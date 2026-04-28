@@ -23,6 +23,8 @@ var builder = WebApplication.CreateBuilder(args);
 //});
 
 //builder.Services.AddCors(options =>
+
+// Registrando os filtros que o controller usa builder.Services.AddScoped<VerificarAutorizacaoFazerPedido();
 //{
 //    options.AddPolicy("FrontendPolicy", policy =>
 //    {
@@ -57,7 +59,12 @@ var jwtAudience = jwtSection["Audience"]
 builder.Services
     .AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(options =>
+
     {
+
+    
+
+
         options.TokenValidationParameters = new TokenValidationParameters
         {
             ValidateIssuer = true,
@@ -111,10 +118,13 @@ builder.Services.AddSwaggerGen(options =>
 
 var app = builder.Build();
 
+app.UseSwagger();
+app.UseSwaggerUI();
+
 if (app.Environment.IsDevelopment())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    
+    
 }
 
 app.UseHttpsRedirection();

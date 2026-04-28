@@ -2,6 +2,7 @@
 using Restaurante.Api.Filtros;
 using SimuladorBancoDados.Interfaces;
 using SimuladorBancoDados.Service;
+using Restaurante.Api.DTOs;
 
 namespace Restaurante.Api.Controllers
 {
@@ -10,40 +11,111 @@ namespace Restaurante.Api.Controllers
     //[ServiceFilter(typeof(VerificarAutorizacaoFazerPedido))]
     public class CardapioController : ControllerBase
     {
-        public CardapioController() 
-        {           
+
+        // Ferramentas que a classe vai usar
+        private readonly IPratoRepository _repository;
+        private readonly ILogger<CardapioController> _logger;
+
+        public CardapioController(IPratoRepository repository, ILogger<CardapioController> logger)
+        {
+            _repository = repository;
+            _logger = logger;
         }
-        
+
+        // Construtor: aqui o sistema "entrega" as ferramentas para o Controlle
+   
         //api/cardapio
+
         [HttpGet("")]
         [ServiceFilter(typeof(LogAuditoria))]
-        public IActionResult Index()
+
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        public IActionResult ListarTodos()
         {
-            return Content("Lista de pratos do cardapio");
+            _logger.LogInformation("Buscando todos os pratos.");
+            var pratos = _repository.BuscaTodosPratos();
+            if (pratos == null || !pratos.Any())
+                return NoContent();
+
+            var listaDto = pratos.Select(p => new PratoResponseDTO
+            {
+                Id = p.Id,
+                Nome = p.Nome,
+                Preco = p.Preco,
+
+                Descricao = p.Descricao,
+                Categoria = p.Categoria,
+                IdFoto = p.IdFoto,
+                Ur1Download = $"/api/cardapio/download-foto/{p.IdFoto}",
+                DataCadastro = p.DataCadastro,
+                Ativo = p.Ativo,
+
+            }).ToList();
+
+            return
+            Ok(listaDto);
+        }
+
+        [HttpPost]
+        public IActionResult
+            CadastrarPrato([FromBody]
+            CreatePratoDTO novoPrato)
+        {
+            _logger.LogInformation("Cadastrando novo prato:{Nome}", novoPrato.Nome);
+
+            // Aqui o código vai continuar no futuro
+            // Por enquanto, só preciso que ele retorne algo
+
+            return CreatedAtAction(nameof(ListarTodos), novoPrato);
         }
 
         //api/cardapio/prato/{id}
-        
+
         [HttpGet("prato/{id}")]
         [ServiceFilter(typeof(VerificarAutorizacaoFazerPedido))]
         public IActionResult ObterPratoPeloId(int id)
+
         {
-            return Content($"Detalhes do prato de id {id}");
-        }
-        //3f2504e0-4f89-11d3-9a0c-0305e82c3301
-        //[HttpGet("prato-guid/{id:guid}")]
-        //public IActionResult ObterPratoPorGuid(Guid id)
-        //{
-        //    return Content($"Busca do prato com o guid {id}");
-        //}
-        // api/cardapio/categoria/saladas/pagina/1
-        //[HttpGet("categoria/{nomeCategoria}/pagina/{pagina:int}")]
-        //[TypeFilter(typeof(VericarCacheFilter))]
-        //public IActionResult ListarPorCategoria(string nomeCategoria, int pagina)
-        //{
-        //    return Content($"Categoria {nomeCategoria}, pagina {pagina}");
-        //}
-    }
+            _logger.LogInformation($"Buscando prato com ID: {id}");
+            var prato = _repository.BuscaPratoPeloId(id);
+            if (prato == null)
+            {
+
+                _logger.LogWarning($"Prato{id} não encontrado.");
+
+                return NotFound();
+            }
+
+            return Ok(new PratoResponseDTO
+            {
+
+                Id = prato.Id,
+                Nome = prato.Nome,
+                Preco = prato.Preco,
+                Descricao = prato.Descricao,
+                Categoria = prato.Categoria,
+                DataCadastro = prato.DataCadastro,
+                IdFoto = prato.IdFoto,
+                Ativo = prato.Ativo,
+                Ur1Download = $"/api/cardapio/dowload-foto/{prato.IdFoto}"
+            });
+        }                                                                  
+        
+    //3f2504e0-4f89-11d3-9a0c-0305e82c3301
+    //[HttpGet("prato-guid/{id:guid}")]
+    //public IActionResult ObterPratoPorGuid(Guid id)
+    //{
+    //    return Content($"Busca do prato com o guid {id}");
+    //}
+    // api/cardapio/categoria/saladas/pagina/1
+    //[HttpGet("categoria/{nomeCategoria}/pagina/{pagina:int}")]
+    //[TypeFilter(typeof(VericarCacheFilter))]
+    //public IActionResult ListarPorCategoria(string nomeCategoria, int pagina)
+    //{
+    //    return Content($"Categoria {nomeCategoria}, pagina {pagina}");
+    //}
+}
 }
 
 
