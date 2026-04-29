@@ -1,4 +1,5 @@
-﻿using SimuladorBancoDados.Entidade;
+﻿using System.Collections.Generic;
+using SimuladorBancoDados.Entidade;
 
 namespace SimuladorBancoDados.Interfaces
 {
