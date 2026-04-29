@@ -18,6 +18,19 @@ namespace Restaurante.Api.Controllers
         private readonly IBancoDados _service;
         private readonly IConfiguration _configuration;
         List<FuncionarioRespostaDto> funcionarios;
+
+
+        // Exercicio 1 Aula 3
+        [HttpGet("teste/{id:int}")]
+        public IActionResult TesteId(int id) { return Ok(new { mensagem = "ID válido", id }); }
+
+
+        // Exercicio 3 Aula 3
+        [HttpGet("teste-exception")]
+        public IActionResult Teste()
+        {
+            throw new ArgumentException("ID inválido para teste");
+        }
         public UsuarioController(IBancoDados service, IConfiguration configuration) {
             funcionarios = new List<FuncionarioRespostaDto>()
             {
