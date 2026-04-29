@@ -1,4 +1,5 @@
 ﻿namespace Restaurante.Api.DTOs
+
 {
     public class ArquivoResponseDTO
     {

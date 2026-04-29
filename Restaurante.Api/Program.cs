@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Restaurante.Api.Filtros;
 using Restaurante.Api.Middlewares;
+using Restaurante.Api.Interface;
 using Restaurante.Api.Services;
 using SimuladorBancoDados.Interfaces;
 using SimuladorBancoDados.Service;
@@ -38,13 +39,15 @@ builder.Services.AddScoped<LogAuditoria>();
 builder.Services.AddScoped<EnvolveRespostaFilter>();
 builder.Services.AddScoped<ExceptionFilter>();
 builder.Services.AddScoped<VericarCacheFilter>();
-builder.Services.AddScoped<ArquivoService>();
+//builder.Services.AddScoped<ArquivoService>();
+builder.Services.AddScoped<IArquivoService, ArquivoService>();
 //builder.Services.AddSingleton -- o gerenciamento ele é feito no iniciar da aplicação
 //builder.Services.AddTransient -- Sempre que é preciso do objeto ele é criado e devolvido
 //builder.Services.AddScoped   -- O objeto permanece valido durante o escopo de onde ele foi criado
 
 builder.Services.AddSingleton<IBancoDados, BancoDadosService>();
 builder.Services.AddSingleton<IPratoRepository, PratoRepository>();
+builder.Services.AddSingleton<IArquivoService, ArquivoService>();
 
 var jwtSection = builder.Configuration.GetSection("Jwt");
 var jwtKey = jwtSection["Key"]
@@ -83,6 +86,8 @@ builder.Services.AddEndpointsApiExplorer();
 
 builder.Services.AddSwaggerGen(options =>
 {
+    options.MapType<IFormFile>(() => new Microsoft.OpenApi.Models.OpenApiSchema { Type = "string", Format = "binary" });
+
     options.AddSecurityDefinition("Bearer", new Microsoft.OpenApi.Models.OpenApiSecurityScheme
     {
         Description = "Use: Bearer {seu_token_jwt}",

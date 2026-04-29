@@ -13,6 +13,39 @@ namespace SimuladorBancoDados.Service
         {
             _logger = logger;
             pratos = new List<Prato>();
+            // Lista de nomes para popular rapidamente
+            var nomes = new List<string>
+    {
+        "Parmegiana de Frango", "Filé Oswaldo Aranha", "Sushi Loko Combo", "Yakisoba Clássico",
+        "Lula à Milanesa", "Strogonoff de Carne", "Alcatra à Moda da Casa", "Feijoada Completa",
+        "Salada Caesar", "Nhoque da Fortuna", "Risoto de Cogumelos", "Bacalhau à Brás",
+        "Hambúrguer Gourmet", "Pizza Margherita", "Lasanha Bolonhesa", "Taco de Chilli",
+        "Camarão na Moranga", "Frango Xadrez", "Peixe Frito", "Costelinha BBQ",
+        "Penne à Carbonara", "Sopa de Cebola", "Moqueca Capixaba", "Pão com Linguiça", "Petit Gâteau"
+    };
+
+            var categorias = new[] { "Carnes", "Peixes", "Massas", "Japonesa", "Sobremesas", "Saladas" };
+            var random = new Random();
+
+            foreach (var nome in nomes)
+            {
+                pratos.Add(new Prato
+                {
+                    Id = proximoId++,
+                    Nome = nome,
+                    Preco = (decimal)(random.NextDouble() * (80 - 20) + 20), // Preço aleatório entre 20 e 80
+                    Descricao = $"Delicioso {nome} preparado com ingredientes selecionados pelo chef.",
+                    Categoria = categorias[random.Next(categorias.Length)],
+                    IdFoto = $"foto_{nome.Replace(" ", "_").ToLower()}.jpg",
+                    Ativo = true,
+                    DataCadastro = DateTime.Now
+                });
+            }
+
+            _logger.LogInformation("{0} pratos foram populados no repositório.", pratos.Count);
+        
+
+
         }
         public void AdicionaPrato(Prato prato)
         {

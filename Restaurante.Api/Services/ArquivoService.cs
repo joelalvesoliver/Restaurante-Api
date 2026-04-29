@@ -1,4 +1,7 @@
-﻿using Restaurante.Api.DTOs;
+﻿using Restaurante.Api.Interface;
+using Restaurante.Api.DTOs;
+
+
 
 namespace Restaurante.Api.Services
 {
@@ -7,7 +10,7 @@ namespace Restaurante.Api.Services
     /// Realiza upload, download, listagem e remoção de arquivos da pasta "ArquivosUpload".
     /// Valida extensões e tamanhos antes de aceitar os arquivos.
     /// </summary>
-    public class ArquivoService
+    public class ArquivoService : IArquivoService
     {
         // Caminho da pasta onde os arquivos serão armazenados no servidor
         private readonly string _pastaBase;

@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Restaurante.Api.DTOs;
 using Restaurante.Api.Services;
+using Restaurante.Api.Interface;
+
 
 namespace Restaurante.Api.Controllers
 {
@@ -8,9 +10,9 @@ namespace Restaurante.Api.Controllers
     [Route("api/[controller]")]
     public class ArquivosController : ControllerBase
     {
-        private readonly ArquivoService _arquivoService;
+        private readonly IArquivoService _arquivoService;
         private readonly ILogger<ArquivosController> _logger;
-        public ArquivosController(ArquivoService arquivoService, ILogger<ArquivosController> logger)
+        public ArquivosController(IArquivoService arquivoService, ILogger<ArquivosController> logger)
         {
             _arquivoService = arquivoService;
             _logger = logger;
@@ -21,7 +23,8 @@ namespace Restaurante.Api.Controllers
         [ProducesResponseType(StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<ArquivoResponseDTO>> Upload([FromForm(Name = "arquivo")] IFormFile arquivo)
+        //public async Task<ActionResult<ArquivoResponseDTO>> Upload([FromForm(Name = "arquivo")] IFormFile arquivo)
+        public async Task<ActionResult<ArquivoResponseDTO>> Upload(IFormFile arquivo)
         {
             _logger.LogInformation("Recebida requisicao de upload de arquivo: {NomeOriginal}", arquivo?.FileName);
 
