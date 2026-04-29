@@ -16,9 +16,9 @@ var builder = WebApplication.CreateBuilder(args);
 //    options.AddPolicy("AllowAllPolicy",
 //        policy =>
 //        {
-//            policy.AllowAnyOrigin()    // Permite qualquer domínio
+//            policy.AllowAnyOrigin()    // Permite qualquer domï¿½nio
 //                  .AllowAnyMethod()    // Permite GET, POST, PUT, DELETE, etc.
-//                  .AllowAnyHeader();   // Permite qualquer cabeçalho
+//                  .AllowAnyHeader();   // Permite qualquer cabeï¿½alho
 //        });
 //});
 
@@ -39,8 +39,8 @@ builder.Services.AddScoped<EnvolveRespostaFilter>();
 builder.Services.AddScoped<ExceptionFilter>();
 builder.Services.AddScoped<VericarCacheFilter>();
 builder.Services.AddScoped<ArquivoService>();
-//builder.Services.AddSingleton -- o gerenciamento ele é feito no iniciar da aplicação
-//builder.Services.AddTransient -- Sempre que é preciso do objeto ele é criado e devolvido
+//builder.Services.AddSingleton -- o gerenciamento ele ï¿½ feito no iniciar da aplicaï¿½ï¿½o
+//builder.Services.AddTransient -- Sempre que ï¿½ preciso do objeto ele ï¿½ criado e devolvido
 //builder.Services.AddScoped   -- O objeto permanece valido durante o escopo de onde ele foi criado
 
 builder.Services.AddSingleton<IBancoDados, BancoDadosService>();
@@ -121,7 +121,7 @@ app.UseHttpsRedirection();
 
 
 // meu segundo middleware
-app.UseMiddleware<BloqueioHeaderMiddleware>();
+//app.UseMiddleware<BloqueioHeaderMiddleware>();
 // Configure the HTTP request pipeline.
 
 // meu primeiro middleware
@@ -148,5 +148,5 @@ app.Run();
 
 
 // Enviar E-mail da conta do Github no Chat
-// Para adicionar vocês como colaboradores do projeto
+// Para adicionar vocï¿½s como colaboradores do projeto
 // CORS Cros-Origin Resource Sharing

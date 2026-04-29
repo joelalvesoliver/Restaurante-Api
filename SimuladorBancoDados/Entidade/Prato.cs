@@ -14,9 +14,9 @@ namespace SimuladorBancoDados.Entidade
         [Range(0.01, double.MaxValue, ErrorMessage = "Preço deve ser maior que zero")]
         public decimal Preco { get; set; }
         [StringLength(500, ErrorMessage = "Descrição não pode exceder 500 caracteres")]
-        public string Descricao { get; set; }
+        public string? Descricao { get; set; }
         [StringLength(50, ErrorMessage = "Categoria não pode exceder 50 caracteres")]
-        public string Categoria { get; set; }
+        public string? Categoria { get; set; }
         [Required(ErrorMessage = "Id da foto é obrigatorio")]
         public string IdFoto { get; set; }
 
